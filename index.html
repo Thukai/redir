@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    window.onload = function () {
+      const params = new URLSearchParams(window.location.search);
+      const target = params.get("url");
+
+      if (target) { 
+        url= decodeURIComponent(target);
+        window.location.href = url;
+        el= document.querySelector(".uu");
+        el.href=url;
+      } else {
+        document.body.innerHTML = "<h2>Invalid or missing URL</h2>";
+      }
+    };
+  </script>
+</head>
+<body>
+  <center>
+    <h3>Redirecting...</h3>
+    <p>This will redirect to player if you dont have the RvX Player you must install it 1st...<br><a class="uu">Click here if not redirected...</a></p>
+  </center>
+</body>
+</html>
