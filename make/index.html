@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Player Redirect Link Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #1e1e2f;
+      color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      max-width: 600px;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 15px;
+      background: #2c2c3a;
+      color: #fff;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #4caf50;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    .output-container {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .link-box {
+      word-break: break-all;
+      background: #2c2c3a;
+      padding: 12px;
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    .copy-btn {
+      background: #2196f3;
+    }
+
+    .copy-btn:hover {
+      background: #1976d2;
+    }
+
+    .note {
+      font-size: 0.9em;
+      margin-top: 10px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>rPlayer Redirect Link Generator</h1>
+  <input type="text" id="rplayerUrl" placeholder="Enter your rplayer:// URL" />
+
+  <button onclick="generateLink()">Generate Redirect Link</button>
+
+  <div class="output-container" id="outputBox" style="display:none;">
+    <div class="link-box" id="resultLink"></div>
+    <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+    <div class="note">This link will open your app using your custom URL scheme.</div>
+  </div>
+
+  <script>
+    function generateLink() {
+      const input = document.getElementById("rplayerUrl").value.trim();
+      if (!input.startsWith("rplayer://")) {
+        alert("Please enter a valid rplayer:// link");
+        return;
+      }
+      const encoded = encodeURIComponent(input);
+      const finalLink = "https://thukai.github.io/redir/?link=" + encoded;
+
+      document.getElementById("resultLink").textContent = finalLink;
+      document.getElementById("outputBox").style.display = "flex";
+    }
+
+    function copyLink() {
+      const text = document.getElementById("resultLink").textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Link copied to clipboard!");
+      });
+    }
+  </script>
+
+</body>
+  </html>
